@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Nascenia Timetracker Checkout Counter</title>
+  <title>Nascenia Timetracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Today's Checkouts</h1>
-  <div id="count">Calculating...</div>
+  <h1>Nascenia Timetracker</h1>
+  <div class="stats-container">
+    <div class="stat-card checkout">
+      <div class="stat-label">Checked Out</div>
+      <div id="count" class="calculating">...</div>
+    </div>
+    <div class="stat-card present">
+      <div class="stat-label">Present Today</div>
+      <div id="presentCount" class="calculating">...</div>
+    </div>
+  </div>
+  <div class="progress-section">
+    <div class="progress-label">Checkout Progress</div>
+    <div class="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
+    <div id="progress-text">0%</div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
