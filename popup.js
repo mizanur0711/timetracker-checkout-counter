@@ -12,13 +12,21 @@ function countCheckouts() {
       {
         target: { tabId: tabs[0].id },
         func: () => {
+          const spanPresent = document.querySelectorAll("span.pull-right");
           const rows = document.querySelectorAll("table.table tbody tr, tbody.word-break tr");
+          let checkoutCount = 0;
+          let presentCount = 0;
           
           if (rows.length === 0) {
-            return 0;
+            return { checkoutCount, presentCount };
           }
 
-          let checkoutCount = 0;
+          if (spanPresent) {
+            const spanText = spanPresent[0].textContent.trim();
+            const match = spanText.match(/Total present today:\s*(\d+)/);
+            presentCount = match ? parseInt(match[1]) : null; 
+          }
+
           
           rows.forEach((row, index) => {
             try {
@@ -39,29 +47,45 @@ function countCheckouts() {
             }
           });
 
-          return checkoutCount;
+          // Return both values as an object
+          return { checkoutCount, presentCount };
         }
       },
       (results) => {
         if (chrome.runtime.lastError) {
-          updateCountDisplay('Error');
+          updateCountDisplay('Error', 'Error');
           return;
         }
         
-        if (results && results[0] && typeof results[0].result === 'number') {
-          updateCountDisplay(results[0].result);
+        if (results && results[0] && results[0].result) {
+          updateCountDisplay(results[0].result.checkoutCount, results[0].result.presentCount);
         } else {
-          updateCountDisplay('N/A');
+          updateCountDisplay('N/A', 'N/A');
         }
       }
     );
   });
 }
 
-function updateCountDisplay(value) {
+function updateCountDisplay(checkoutCount, presentCount) {
   const countElement = document.getElementById('count');
+  const presentCountElement = document.getElementById('presentCount');
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+
   if (countElement) {
-    countElement.innerText = value;
+    countElement.innerText = checkoutCount;
+  }
+  if (presentCountElement) {
+    presentCountElement.innerText = presentCount;
+  }
+
+  // Calculate and update progress
+  if (progressFill && progressText && presentCount && checkoutCount) {
+    const total = parseInt(presentCount) + parseInt(checkoutCount);
+    const percentage = total > 0 ? Math.round((checkoutCount / total) * 100) : 0;
+    progressFill.style.width = `${percentage}%`;
+    progressText.innerText = `${percentage}%`;
   }
 }
 
