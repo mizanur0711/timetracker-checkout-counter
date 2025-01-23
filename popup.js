@@ -4,7 +4,19 @@ function countCheckouts() {
   }
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (!tabs || !tabs[0]) {
+    if (!tabs[0] || !tabs[0].url.includes('timetracker.nascenia.com')) {
+      document.getElementById('count').innerText = 'N/A';
+      document.getElementById('presentCount').innerText = 'N/A';
+      
+      const goToUrlButton = document.createElement('button');
+      goToUrlButton.innerText = 'Go to Timetracker';
+      goToUrlButton.addEventListener('click', () => {
+        chrome.tabs.create({ url: 'http://timetracker.nascenia.com/' });
+      });
+      
+      const urlRedirectContainer = document.getElementById('url-redirect-container');
+      urlRedirectContainer.appendChild(goToUrlButton);
+      
       return;
     }
 
