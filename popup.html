@@ -5,24 +5,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Nascenia Timetracker</h1>
-  <div class="stats-container">
-    <div class="stat-card checkout">
-      <div class="stat-label">Checked Out</div>
-      <div id="count" class="calculating">...</div>
+  <h1 style="font-size: 18px; text-align: center; margin: 0 0 20px 0; color: #1f2937; font-weight: 600;">Nascenia Timetracker</h1>
+  <div class="stats-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 5px;">
+    <div class="stat-card checkout" style="background: white; border-radius: 8px; padding: 12px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); text-align: center; border: 1px solid #dbeafe;">
+      <div class="stat-label" style="font-size: 13px; color: #6b7280; margin-bottom: 4px; font-weight: 500;">Checked Out</div>
+      <div id="count" class="calculating" style="color: #eb4325; font-size: 24px; font-weight: 600;">...</div>
     </div>
-    <div class="stat-card present">
-      <div class="stat-label">Present Today</div>
-      <div id="presentCount" class="calculating">...</div>
+    <div class="stat-card present" style="background: white; border-radius: 8px; padding: 12px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); text-align: center; border: 1px solid #dcfce7;">
+      <div class="stat-label" style="font-size: 13px; color: #6b7280; margin-bottom: 4px; font-weight: 500;">Present Today</div>
+      <div id="presentCount" class="calculating" style="color: #16a34a; font-size: 24px; font-weight: 600;">...</div>
     </div>
   </div>
   <span id="url-redirect-container"></span>
-  <div class="progress-section">
-    <div class="progress-label">Checkout Progress</div>
-    <div class="progress-bar">
-      <div id="progress-fill"></div>
+  <div class="progress-section" style="margin-top: 16px; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);">
+    <div class="progress-label" style="font-size: 13px; color: #6b7280; margin-bottom: 8px; font-weight: 500;">Checkout Progress</div>
+    <div class="progress-bar" style="height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-bottom: 4px;">
+      <div id="progress-fill" style="height: 100%; background: linear-gradient(to right, #eb4325, #a38e16); width: 0%; transition: width 0.3s ease-in-out;"></div>
     </div>
-    <div id="progress-text">0%</div>
+    <div id="progress-text" style="font-size: 13px; color: #6b7280;">0%</div>
   </div>
   <script src="popup.js"></script>
 </body>

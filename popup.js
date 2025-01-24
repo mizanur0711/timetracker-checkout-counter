@@ -9,6 +9,7 @@ function countCheckouts() {
       document.getElementById('presentCount').innerText = 'N/A';
       
       const goToUrlButton = document.createElement('button');
+      goToUrlButton.classList.add('btn', 'btn-primary');
       goToUrlButton.innerText = 'Go to Timetracker';
       goToUrlButton.addEventListener('click', () => {
         chrome.tabs.create({ url: 'http://timetracker.nascenia.com/' });
